@@ -1,6 +1,13 @@
 from django.contrib import admin
-from .models import Company, Job, Applicant
+from .models import CustomUser, EmailVerification
 
-admin.site.register(Company)
-admin.site.register(Job)
-admin.site.register(Applicant)
+@admin.register(CustomUser)
+class CustomUserAdmin(admin.ModelAdmin):
+    list_display = ("full_name", "email", "is_active", "email_verified", "is_staff")
+    search_fields = ("email", "full_name")
+    list_filter = ("is_active", "email_verified", "is_staff")
+
+@admin.register(EmailVerification)
+class EmailVerificationAdmin(admin.ModelAdmin):
+    list_display = ("user", "token", "is_used", "created_at")
+    search_fields = ("user__email",)

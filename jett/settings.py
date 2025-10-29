@@ -103,13 +103,15 @@ AUTH_USER_MODEL = 'landing.CustomUser'
 # ======================
 # EMAIL CONFIG (for verification)
 # ======================
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'no-reply@jett.com'
+AUTH_USER_MODEL = 'landing.CustomUser'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'emailmu@gmail.com'  # ganti dengan email Gmail kamu
-EMAIL_HOST_PASSWORD = 'app-password-gmail'  # gunakan app password Gmail
+EMAIL_HOST_USER = 'segelaskopisaja@gmail.com'
+EMAIL_HOST_PASSWORD = 'nthc llcp etgs hpeb'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 # ======================
