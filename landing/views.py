@@ -14,6 +14,16 @@ def homepage(request):
         return redirect('index')
     return render(request, 'homepage.html')
 
+def homepage_kerja(request):
+    if not request.user.is_authenticated:
+        return redirect('index')
+    return render(request, 'homepage_kerja.html')
+
+def homepage_staff(request):
+    if not request.user.is_authenticated:
+        return redirect('index')
+    return render(request, 'homepage_staff.html')
+
 def register_user(request):
     if request.method == 'POST':
         full_name = request.POST.get('full_name')
