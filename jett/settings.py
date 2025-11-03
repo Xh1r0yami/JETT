@@ -118,7 +118,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # INTERNATIONALIZATION
 # ======================
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'Asia/Jakarta'  # ubah biar sesuai zona waktu kamu
+TIME_ZONE = 'Asia/Jakarta'  
 USE_I18N = True
 USE_TZ = True
 

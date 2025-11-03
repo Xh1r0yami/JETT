@@ -43,7 +43,6 @@ def register_user(request):
         verification = EmailVerification.objects.create(user=user)
         verify_link = request.build_absolute_uri(f"/verify-email/{verification.token}/")
 
-        # Kirim email verifikasi
         try:
             send_mail(
                 subject="Verifikasi Akun JETT",
