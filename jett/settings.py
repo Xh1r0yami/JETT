@@ -1,20 +1,13 @@
 """
 Django settings for jett project.
 """
-from pathlib import Path
-from dotenv import load_dotenv
-import os
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-load_dotenv(BASE_DIR / '.env')
 
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv('SECRET_KEY')
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+SECRET_KEY = 'django-insecure-dv9yo#p_p3nej(en**h5yom=&tukx0o0yu11iskj&v7#uk^9i@'
+DEBUG = True
 ALLOWED_HOSTS = []
 
 
@@ -116,8 +109,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = 'segelaskopisaja@gmail.com'
+EMAIL_HOST_PASSWORD = 'nthc llcp etgs hpeb'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
