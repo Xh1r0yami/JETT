@@ -15,14 +15,21 @@ ALLOWED_HOSTS = []
 # INSTALLED APPS
 # ======================
 INSTALLED_APPS = [
+    # Django default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'landing',  # app kamu
+
+    # Your apps
+    'landing',          # APP yg berisi CustomUser dan landing page
+    'companies',        # APP untuk tabel companies
+    'jobs',             # APP untuk tabel jobs
+    'applications',     # APP untuk tabel applications
 ]
+
 
 
 # ======================
@@ -69,10 +76,18 @@ WSGI_APPLICATION = 'jett.wsgi.application'
 # ======================
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'jett_db',
+        'USER': 'admin',
+        'PASSWORD': 'adminpass',
+        'HOST': '127.0.0.1',
+        'PORT': '3307',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
     }
 }
+
 
 
 # ======================
