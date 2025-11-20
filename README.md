@@ -3,17 +3,19 @@
 Proyek ini adalah aplikasi job portal yang memungkinkan pengguna untuk mendaftar akun, login, melamar pekerjaan, dan bagi perusahaan untuk memposting lowongan.
 Backend dibangun menggunakan **Django**, database menggunakan **MySQL (Docker)**, dan frontend menggunakan template bawaan Django.
 
+## Instalasi Dependencies
+
+Sebelum menjalankan project, install library Python berikut:
+
+```bash
+pip install pymysql
+```
+
 ## Menjalankan MySQL dengan Docker
 
 1. Pastikan Docker sudah ter-install.
 2. Jalankan perintah berikut di folder project:
 
-
-Install dependency Python:
-
-```bash
-pip install pymysql
-```
 
 ```bash
 docker compose up -d
