@@ -9,72 +9,79 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Konkhmer+Sleokchher&display=swap" rel="stylesheet">
 
-  <!-- Style Utama -->
+  <!-- CSS GLOBAL -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <!-- Style Modal -->
+  
+  <!-- CSS Modal -->
   <link rel="stylesheet" href="{% static 'css/modal.css' %}">
 </head>
-<body>
 
-  <!-- ===== Navbar ===== -->
+<body class="page-home">
+
+  <!-- ================= NAVBAR ================= -->
   <header class="navbar">
     <div class="nav-container">
+
       <div class="logo">
         <img src="{% static 'img/logo-navbar.png' %}" alt="JETT Logo">
       </div>
 
       <div class="nav-right">
         <div class="nav-links">
-          <a href="#" id="openLoginKerja">Cari Kerja</a>
-        <a href="#" id="openLoginStaff">Cari Staf</a>
+          <a href="/homepage_kerja/">Cari Kerja</a>
+          <a href="#" id="openLoginStaff">Cari Staf</a>
         </div>
+
         <div class="signin-btn">
           <button id="openLoginModal">Sign In</button>
         </div>
       </div>
+
     </div>
   </header>
 
-  <!-- ===== Hero Section ===== -->
+  <!-- ================= HERO ================= -->
   <section class="hero">
     <h1 class="headline">HEADLINE</h1>
   </section>
 
-  <!-- ===== About Section ===== -->
+  <!-- ================= ABOUT ================= -->
   <section class="about">
     <h2>Get To Know JETT!</h2>
-    <p>19 JUTA LAPANGAN PEKERJAAN <br></p>
+    <p>19 JUTA LAPANGAN PEKERJAAN</p>
   </section>
 
-  <!-- ===== Hiring Section ===== -->
+  <!-- ================= HIRING ================= -->
   <section class="hiring">
     <h3>Sedang Hiring di JETT!</h3>
     <img src="{% static 'img/company-logos.png' %}" alt="Company Logos">
   </section>
 
-  <!-- ===== Footer ===== -->
+  <!-- ================= FOOTER ================= -->
   <footer class="footer">
     <div class="footer-container">
+
       <div class="footer-left">
         <img src="{% static 'img/logo-footer.png' %}" alt="JETT Logo">
         <p>Hubungi kami:</p>
         <p>Email: cs@jett.id</p>
         <p>Whatsapp: 080808080808</p>
+
         <div class="social-icons">
-          <img src="{% static 'img/fb-icon.png' %}" alt="Facebook">
-          <img src="{% static 'img/ig-icon.png' %}" alt="Instagram">
+          <img src="{% static 'img/fb-icon.png' %}">
+          <img src="{% static 'img/ig-icon.png' %}">
         </div>
       </div>
+
       <div class="footer-right">
-        <a href="#">Cari Kerja</a>
-        <a href="#">Cari Staf</a>
+        <a href="/homepage_kerja/">Cari Kerja</a>
+        <a href="#" id="openLoginStaffFooter">Cari Staf</a>
       </div>
+
     </div>
   </footer>
 
-  <!-- ============================= -->
-  <!-- ===== POP-UP LOGIN MODAL ==== -->
-  <!-- ============================= -->
+  <!-- ================= MODALS ================= -->
   <div id="loginModal" class="modal">
     <div class="modal-content">
       <span class="close" data-close="loginModal">&times;</span>
@@ -87,14 +94,12 @@
         <button type="submit">Masuk</button>
       </form>
 
-      <p> Tidak punya akun? <a href="#" id="openRegisterLink"><em>Daftar di sini.</em></a></p>
+      <p>Tidak punya akun? <a href="#" id="openRegisterLink"><em>Daftar di sini.</em></a></p>
       <div id="loginMessage" class="message-box"></div>
     </div>
   </div>
 
-  <!-- =============================== -->
-  <!-- ===== POP-UP REGISTER MODAL ==== -->
-  <!-- =============================== -->
+  <!-- REGISTER -->
   <div id="registerModal" class="modal">
     <div class="modal-content">
       <span class="close" data-close="registerModal">&times;</span>
@@ -104,27 +109,26 @@
         {% csrf_token %}
         <input type="text" name="full_name" placeholder="Nama Lengkap" required>
         <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Kata Sandi" required>
+        <input type="password" name="password" id="password" placeholder="Kata Sandi" required>
+        <input type="password" name="confirm_password" id="confirm_password" placeholder="Ulangi Kata Sandi" required>
         <button type="submit">Daftar</button>
       </form>
 
-      <p> Sudah punya akun? <a href="#" id="openLoginLink"><em>Masuk di sini.</em></a></p>
+      <p>Sudah punya akun? <a href="#" id="openLoginLink"><em>Masuk di sini.</em></a></p>
       <div id="registerMessage" class="message-box"></div>
     </div>
   </div>
 
-  <!-- =============================== -->
-  <!-- ===== MODAL VERIFIKASI EMAIL === -->
-  <!-- =============================== -->
+  <!-- VERIFIKASI -->
   <div id="verifyModal" class="modal">
     <div class="modal-content">
       <h2>Verifikasi Email</h2>
-      <p>Kami telah mengirimkan tautan verifikasi ke email Anda. Silakan periksa kotak masuk.</p>
+      <p>Kami telah mengirimkan tautan verifikasi ke email Anda.</p>
       <button id="closeVerifyModal">Tutup</button>
     </div>
   </div>
 
-  <!-- Script Modal -->
   <script src="{% static 'js/modal.js' %}" defer></script>
+
 </body>
 </html>

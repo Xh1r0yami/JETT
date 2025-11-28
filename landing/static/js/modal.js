@@ -1,32 +1,43 @@
 document.addEventListener("DOMContentLoaded", function() {
-  // ======== Ambil elemen modal ========
+
   const loginModal = document.getElementById("loginModal");
   const registerModal = document.getElementById("registerModal");
   const verifyModal = document.getElementById("verifyModal");
 
-  // ======== Ambil tombol dari index.html ========
   const btnKerja = document.getElementById("openLoginKerja");
   const btnStaff = document.getElementById("openLoginStaff");
   const btnSignIn = document.getElementById("openLoginModal");
 
-  // ======== Fungsi buka modal login ========
+  // Check login state from template
+  const isLoggedIn = window.isLoggedIn === true;
+
+  // =============================
+  // ====== Redirect logic =======
+  // =============================
+  function openLoginOrRedirect(type) {
+    if (isLoggedIn) {
+      window.location.href = type === "kerja" ? "/homepage_kerja/" : "/homepage_staff/";
+    } else {
+      openLoginModal(type);
+    }
+  }
+
   function openLoginModal(type = "kerja") {
     loginModal.dataset.type = type;
     loginModal.style.display = "flex";
   }
 
-  // ======== Event tombol ========
   if (btnKerja) {
     btnKerja.addEventListener("click", (e) => {
       e.preventDefault();
-      openLoginModal("kerja");
+      openLoginOrRedirect("kerja");
     });
   }
 
   if (btnStaff) {
     btnStaff.addEventListener("click", (e) => {
       e.preventDefault();
-      openLoginModal("staff");
+      openLoginOrRedirect("staff");
     });
   }
 
@@ -37,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // ======== Link antar modal ========
+  // Switch modal links
   const openLoginLink = document.getElementById("openLoginLink");
   const openRegisterLink = document.getElementById("openRegisterLink");
 
@@ -57,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // ======== Tutup modal ========
   document.querySelectorAll(".close").forEach(btn => {
     btn.addEventListener("click", () => {
       const target = document.getElementById(btn.dataset.close);
@@ -71,74 +81,77 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // =============================
-  // ======== REGISTER FORM ======
-  // =============================
+  function showMessage(elementId, text, kind = "error") {
+    const el = document.getElementById(elementId);
+    if (!el) return alert(text);
+    el.className = "message-box " + kind;
+    el.textContent = text;
+
+    if (kind === "success") {
+      setTimeout(() => { el.textContent = ""; el.className = "message-box"; }, 3000);
+    }
+  }
+
+  // =======================
+  // ===== REGISTER ========
+  // =======================
   const registerForm = document.getElementById("registerForm");
   if (registerForm) {
     registerForm.addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      const pwd = document.getElementById("password").value;
+      const pwd2 = document.getElementById("confirm_password").value;
+
+      if (pwd !== pwd2) {
+        return showMessage("registerMessage", "Password tidak sama.", "error");
+      }
+
       const formData = new FormData(registerForm);
 
       try {
-        const response = await fetch(registerForm.action, {
-          method: "POST",
-          body: formData,
-        });
+        const response = await fetch(registerForm.action, { method: "POST", body: formData });
         const result = await response.json();
 
         if (result.status === "success") {
-          // Tutup modal register dan tampilkan verifikasi
           registerModal.style.display = "none";
           verifyModal.style.display = "flex";
         } else {
-          alert(result.message || "Gagal mendaftar. Silakan coba lagi.");
+          showMessage("registerMessage", result.message, "error");
         }
-      } catch (error) {
-        console.error("Error saat register:", error);
-        alert("Terjadi kesalahan saat mendaftar.");
+      } catch {
+        showMessage("registerMessage", "Terjadi kesalahan server.", "error");
       }
     });
   }
 
-  // =============================
-  // ========= LOGIN FORM ========
-  // =============================
+  // =======================
+  // ====== LOGIN ==========
+  // =======================
   const loginForm = document.getElementById("loginForm");
   if (loginForm) {
     loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const formData = new FormData(loginForm);
-      const userType = loginModal.dataset.type || "kerja"; // default kerja
+      const userType = loginModal.dataset.type;
+
       formData.append("user_type", userType);
 
       try {
-        const response = await fetch(loginForm.action, {
-          method: "POST",
-          body: formData,
-        });
+        const response = await fetch(loginForm.action, { method: "POST", body: formData });
         const result = await response.json();
 
         if (result.status === "success") {
-          // Redirect ke halaman sesuai tipe login
-          if (userType === "kerja") {
-            window.location.href = "/homepage_kerja/";
-          } else if (userType === "staff") {
-            window.location.href = "/homepage_staff/";
-          } else {
-            window.location.href = "/";
-          }
+          window.location.href = userType === "kerja" ? "/homepage_kerja/" : "/homepage_staff/";
         } else {
-          alert(result.message || "Login gagal. Periksa email & password.");
+          showMessage("loginMessage", result.message, "error");
         }
-      } catch (error) {
-        console.error("Error saat login:", error);
-        alert("Terjadi kesalahan saat login.");
+      } catch {
+        showMessage("loginMessage", "Kesalahan server saat login.", "error");
       }
     });
   }
 
-  // Tutup modal verifikasi
   const closeVerifyModal = document.getElementById("closeVerifyModal");
   if (closeVerifyModal) {
     closeVerifyModal.addEventListener("click", () => {

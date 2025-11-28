@@ -2,11 +2,127 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>JETT - Cari Kerja</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="UTF-8">
+    <title>JETT - Cari Kerja</title>
+
+    <!-- GLOBAL STYLE -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- STYLE KHUSUS HALAMAN INI -->
+    <link rel="stylesheet" href="{% static 'css/homepage_kerja.css' %}">
+    <script src="{% static 'js/modal.js' %}" defer></script>
 </head>
-<body>
-  <h1>Selamat datang di halaman Cari Kerja!</h1>
+
+<body class="page-kerja">
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+    <div class="nav-container">
+
+        <div class="logo">
+            <img src="{% static 'img/logo-navbar.png' %}" alt="LOGO">
+        </div>
+
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="/homepage_kerja/">Cari Kerja</a>
+                <a href="/homepage_staff/">Cari Staf</a>
+            </div>
+
+            <div class="signin-btn">
+                {% if request.user.is_authenticated %}
+                    <a href="/logout/" class="logout-btn">Logout</a>
+                {% else %}
+                    <button id="openLoginModal">Sign In</button>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</header>
+
+<!-- ================= SEARCH ================= -->
+<section class="search-section">
+    <div class="search-container">
+
+        <div class="search-group">
+            <label>Cari pekerjaan apa?</label>
+            <input type="text" placeholder="Masukkan kata kunci">
+        </div>
+
+        <div class="search-group">
+            <label>&nbsp;</label>
+            <input type="text" placeholder="Semua klasifikasi">
+        </div>
+
+        <div class="search-group">
+            <label>Di mana?</label>
+            <input type="text" placeholder="Masukkan kota atau wilayah">
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= JOB LIST ================= -->
+<section class="job-section">
+
+{% if jobs %}
+    {% for job in jobs %}
+    <div class="job-card">
+        <h3>{{ job.title }}</h3>
+        <p><strong>Perusahaan:</strong> {{ job.company }}</p>
+        <p><strong>Lokasi:</strong> {{ job.location }}</p>
+
+        {% if request.user.is_authenticated %}
+            <button class="apply-btn">Apply Sekarang</button>
+        {% else %}
+            <button class="apply-btn apply-login-btn" data-job="{{ job.id }}">
+                Apply Sekarang
+            </button>
+        {% endif %}
+    </div>
+    {% endfor %}
+{% else %}
+    <p class="no-jobs">Belum ada lowongan tersedia.</p>
+{% endif %}
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-left">
+            <img src="{% static 'img/logo-footer.png' %}" alt="LOGO">
+            <p>Hubungi kami:</p>
+            <p>Email: cs@jett.id</p>
+            <p>Whatsapp: 080808080808</p>
+
+            <div class="social-icons">
+                <img src="{% static 'img/ig-icon.png' %}">
+                <img src="{% static 'img/fb-icon.png' %}">
+            </div>
+
+            <p class="copy">© 2025 JETT. Semua hak dilindungi.</p>
+        </div>
+
+        <div class="footer-right">
+            <a href="/homepage_kerja/">Cari Kerja</a>
+            <a href="/homepage_staff/">Cari Staf</a>
+            <a href="/about/">Tentang Kami</a>
+        </div>
+
+    </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".apply-login-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            document.getElementById("loginModal").style.display = "flex";
+        });
+    });
+});
+</script>
+
 </body>
 </html>

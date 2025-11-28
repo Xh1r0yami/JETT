@@ -1,40 +1,63 @@
-"""
-Django settings for jett project.
-"""
-
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-dv9yo#p_p3nej(en**h5yom=&tukx0o0yu11iskj&v7#uk^9i@'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+ROOT_URLCONF = 'jett.urls'
+WSGI_APPLICATION = 'jett.wsgi.application'
+
+# =========================
+# DATABASE (SQLite)
+# =========================
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+# =========================
+# CUSTOM USER MODEL
+# =========================
+AUTH_USER_MODEL = 'landing.CustomUser'
+
+# =========================
+# STATIC & MEDIA
+# =========================
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'landing/static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# =========================
+# EMAIL MODE (DEV)
+# =========================
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "segelaskopisaja@gmail.com"
+EMAIL_HOST_PASSWORD = "ngno iebn qdqu jjkw"   
 
 
-# ======================
-# INSTALLED APPS
-# ======================
 INSTALLED_APPS = [
-    # Django default apps
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Your apps
-    'landing',          # APP yg berisi CustomUser dan landing page
-    'companies',        # APP untuk tabel companies
-    'jobs',             # APP untuk tabel jobs
-    'applications',     # APP untuk tabel applications
+    'landing',
+    'applications',
+    'companies',
+    'jobs',
 ]
 
-
-
-# ======================
-# MIDDLEWARE
-# ======================
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -42,23 +65,19 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
-ROOT_URLCONF = 'jett.urls'
-
-
-# ======================
-# TEMPLATE SETTINGS
-# ======================
+# =========================
+# TEMPLATE ENGINE
+# =========================
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],  # kamu bisa tambahkan folder template global di sini
+        'DIRS': [BASE_DIR / 'landing' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -66,85 +85,3 @@ TEMPLATES = [
         },
     },
 ]
-
-
-WSGI_APPLICATION = 'jett.wsgi.application'
-
-
-# ======================
-# DATABASE
-# ======================
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'jett_db',
-        'USER': 'admin',
-        'PASSWORD': 'adminpass',
-        'HOST': '127.0.0.1',
-        'PORT': '3307',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        }
-    }
-}
-
-
-
-# ======================
-# PASSWORD VALIDATION
-# ======================
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-
-# ======================
-# CUSTOM USER MODEL
-# ======================
-AUTH_USER_MODEL = 'landing.CustomUser'
-
-
-# ======================
-# EMAIL CONFIG (for verification)
-# ======================
-AUTH_USER_MODEL = 'landing.CustomUser'
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'segelaskopisaja@gmail.com'
-EMAIL_HOST_PASSWORD = 'nthc llcp etgs hpeb'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
-
-# ======================
-# INTERNATIONALIZATION
-# ======================
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'Asia/Jakarta'  
-USE_I18N = True
-USE_TZ = True
-
-
-# ======================
-# STATIC FILES
-# ======================
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
