@@ -1,0 +1,19 @@
+{% load static %}
+<div id="loginCompanyModal" class="modal">
+  <div class="modal-content">
+    <span class="close" data-close="loginCompanyModal">&times;</span>
+    <h2>Login Employer</h2>
+
+    <form id="loginCompanyForm" method="POST" action="{% url 'accounts:login_company' %}">
+      {% csrf_token %}
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <p><a href="#" id="openForgotCompanyLink"><em>Lupa password?</em></a></p>
+
+    <p>Tidak punya akun? <a href="#" id="openRegisterCompanyLink"><em>Daftar di sini</em></a></p>
+    <div id="loginCompanyMessage" class="message-box"></div>
+  </div>
+</div>

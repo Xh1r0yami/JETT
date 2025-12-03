@@ -1,17 +1,25 @@
 from django.db import models
-from companies.models import Company
+from django.utils import timezone
+import uuid
+from accounts.models import CustomUser
+
 
 class Job(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    title = models.CharField(max_length=150)
-    description = models.TextField()
-    location = models.CharField(max_length=100)
-    job_type = models.CharField(max_length=50)
-    salary = models.CharField(max_length=50, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
-    class Meta:
-        db_table = "jobs"   # sesuai tabel MySQL
+    company = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        related_name="jobs",
+        limit_choices_to={"role": "company"},
+    )
+
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    location = models.CharField(max_length=255, blank=True)
+    salary = models.CharField(max_length=100, blank=True)
+
+    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f"{self.title} - {self.company.name}"
+        return f"{self.title} – {self.company.full_name}"

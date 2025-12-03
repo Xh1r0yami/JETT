@@ -1,0 +1,235 @@
+/* ================= MODAL BASE ================= */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Hanken Grotesk', sans-serif;
+  background-color: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+}
+
+/* ================= MODAL CONTENT ================= */
+.modal-content {
+  position: relative;
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  text-align: center;
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* ================= CLOSE BUTTON ================= */
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close:hover {
+  color: #000;
+}
+
+/* ================= HEADINGS ================= */
+.modal h2 {
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #333;
+  font-size: 20px;
+}
+
+/* ================= FORM ================= */
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.modal input,
+.modal select,
+.modal textarea {
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.modal input:focus,
+.modal select:focus,
+.modal textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.3);
+}
+
+/* ================= BUTTON ================= */
+.modal button {
+  padding: 10px 12px;
+  font-size: 15px;
+  border-radius: 6px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.modal button:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+.modal button#closeVerifySeeker,
+.modal button#closeVerifyCompany {
+  background-color: #6c757d;
+}
+
+.modal button#closeVerifySeeker:hover,
+.modal button#closeVerifyCompany:hover {
+  background-color: #5a6268;
+}
+
+/* ================= MESSAGE BOX ================= */
+.message-box {
+  font-size: 13px;
+  text-align: center;
+  min-height: 18px;
+}
+
+.message-box.error {
+  color: #d9534f;
+}
+
+.message-box.success {
+  color: #28a745;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= PROFILE SECTION ================= */
+.profile-section {
+  font-family: 'Hanken Grotesk', sans-serif;
+  max-width: 650px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px 35px;
+  border-radius: 16px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+}
+
+.profile-section h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #222;
+}
+
+.profile-section p.subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 18px;
+}
+
+/* ================= ALERT BOX ================= */
+.alert-box {
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+  font-size: 14px;
+}
+
+.alert-success {
+  background: #e6ffec;
+  border-left: 4px solid #28a745;
+  color: #155724;
+}
+
+.alert-error {
+  background: #ffe8e7;
+  border-left: 4px solid #d9534f;
+  color: #721c24;
+}
+
+/* ================= PROFILE FORM ================= */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 7px;
+  border: 1px solid #ccc;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0,123,255,0.25);
+}
+
+/* TEXTAREA */
+.input-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* SUBMIT BUTTON */
+.profile-submit-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 7px;
+  border: none;
+  background: #007bff;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.profile-submit-btn:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+}

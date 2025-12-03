@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Profil Perusahaan{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/company_profile.css' %}">
+
+<div class="profile-wrapper">
+
+    <h1 class="page-title">Lengkapi Profil Perusahaan</h1>
+
+    <form method="POST" enctype="multipart/form-data" class="profile-form">
+        {% csrf_token %}
+
+        <!-- Nama Perusahaan (readonly) -->
+        <div class="input-group">
+            <label>Nama Perusahaan</label>
+            <input type="text" name="company_name" value="{{ user.full_name|default:'' }}" readonly>
+        </div>
+
+        <!-- Nama Pemilik -->
+        <div class="input-group">
+            <label>Nama Pemilik</label>
+            <input type="text" name="owner_name" value="{{ company_profile.owner_name|default:'' }}">
+        </div>
+
+        <!-- Alamat Perusahaan -->
+        <div class="input-group">
+            <label>Alamat Perusahaan</label>
+            <input type="text" name="address" value="{{ company_profile.address|default:'' }}">
+        </div>
+
+        <!-- Nomor Telepon -->
+        <div class="input-group short">
+            <label>Nomor Telepon Perusahaan</label>
+            <input type="text" name="phone" value="{{ company_profile.phone|default:'' }}" placeholder="08">
+        </div>
+
+        <!-- Bidang Industri -->
+        <div class="input-group">
+            <label>Bidang Industri</label>
+            <select name="industry">
+                <option value="">-- Pilih Industri --</option>
+                {% for code, label in company_profile.INDUSTRY_CHOICES %}
+                    <option value="{{ code }}"
+                        {% if company_profile.industry == code %}selected{% endif %}>
+                        {{ label }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Deskripsi Perusahaan -->
+        <div class="input-group">
+            <label>Deskripsi Perusahaan</label>
+            <textarea name="description" rows="4">{{ company_profile.description|default:'' }}</textarea>
+        </div>
+
+        <!-- Logo Perusahaan -->
+        <div class="input-group">
+            <label>Logo Perusahaan</label>
+
+            {% if company_profile.logo %}
+                <img src="{{ company_profile.logo.url }}" alt="Logo Perusahaan" class="preview-logo">
+            {% endif %}
+
+            <input type="file" name="logo">
+        </div>
+
+        <button type="submit" class="submit-btn">Simpan Profil</button>
+
+    </form>
+
+</div>
+
+{% endblock %}

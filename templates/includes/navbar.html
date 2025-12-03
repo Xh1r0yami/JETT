@@ -1,0 +1,55 @@
+{% load static %}
+<nav class="navbar">
+  <div class="nav-container">
+
+    <!-- LOGO - balik ke landing -->
+    <div class="logo">
+      <a href="{% url 'landing:home' %}">
+        <img src="{% static 'img/logo-navbar.png' %}" alt="JETT Logo">
+      </a>
+    </div>
+
+    <!-- NAV RIGHT -->
+    <div class="nav-right">
+
+      <div class="nav-links">
+        <a href="{% url 'landing:home' %}">Cari Kerja</a>
+        <a href="#">Cari Staf</a>
+      </div>
+
+      <!-- ======= USER BELUM LOGIN ======= -->
+      {% if not request.user.is_authenticated %}
+      <div class="signin-btn" id="signin-wrapper">
+        <button id="openLoginModal">Sign In</button>
+      </div>
+      {% endif %}
+
+      <!-- ======= USER SUDAH LOGIN ======= -->
+      {% if request.user.is_authenticated %}
+      <div class="profile-dropdown">
+        <button class="profile-btn">
+          {{ request.user.full_name|default:request.user.email }}
+        </button>
+
+        <div class="profile-menu">
+          {% if request.user.role == "seeker" %}
+            <a href="{% url 'accounts:seeker_profile' %}">Profil</a>
+          {% elif request.user.role == "company" %}
+            <a href="{% url 'accounts:company_profile' %}">Profil</a>
+          {% endif %}
+
+          <a href="{% url 'accounts:logout' %}">Logout</a>
+
+          {% comment %}
+          Jika punya fitur delete account
+          {% endcomment %}
+          <a href="{% url 'accounts:delete_account' %}">Hapus Akun</a>
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+</nav>
+

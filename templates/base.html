@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}JETT - Job Portal{% endblock %}</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Konkhmer+Sleokchher&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v={{ now }}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}?v={{ now }}">
+    <link rel="stylesheet" href="{% static 'css/modal-verif.css' %}?v={{ now }}">
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    {% include "includes/navbar.html" %}
+
+    <!-- ================= PAGE CONTENT ================= -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    {% include "includes/footer.html" %}
+
+    <!-- ================= MODALS ================= -->
+    {% include "accounts/modal_choose_role.html" %}
+    {% include "accounts/login_seeker.html" %}
+    {% include "accounts/login_company.html" %}
+    {% include "accounts/register_seeker.html" %}
+    {% include "accounts/register_company.html" %}
+    {% include "accounts/reset_password.html" %}  
+
+    <!-- ================= JS ================= -->
+    <script src="{% static 'js/modal.js' %}?v={{ now }}" defer></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

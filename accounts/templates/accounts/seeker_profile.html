@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Lengkapi Data Dirimu{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/seeker_profile.css' %}">
+
+<div class="profile-wrapper">
+    <h1 class="page-title">Lengkapi data dirimu terlebih dahulu</h1>
+
+    <form method="POST" enctype="multipart/form-data" class="profile-form">
+        {% csrf_token %}
+
+        <!-- Nama -->
+        <div class="input-group">
+            <label>Nama lengkap</label>
+            <input type="text" name="full_name" value="{{ user.full_name|default:'' }}" readonly>
+        </div>
+
+        <!-- Tanggal Lahir -->
+        <div class="input-group short">
+            <label>Tanggal Lahir</label>
+            <input type="date" name="date_of_birth"
+                   value="{{ seeker_profile.date_of_birth|date:'Y-m-d'|default:'' }}">
+        </div>
+
+        <!-- Alamat -->
+        <div class="input-group">
+            <label>Alamat rumah</label>
+            <input type="text" name="address" value="{{ seeker_profile.address|default:'' }}">
+        </div>
+
+        <!-- Phone -->
+        <div class="input-group short">
+            <label>Nomor telepon</label>
+            <input type="text" name="phone" placeholder="08" value="{{ seeker_profile.phone|default:'' }}">
+        </div>
+
+        <h3 class="section-title">Klasifikasi pilihan</h3>
+
+        <!-- Pendidikan -->
+        <div class="input-group short">
+            <label>Riwayat pendidikan terakhir</label>
+            <select name="education">
+                <option value="">-- Pilih Pendidikan --</option>
+                {% for code, label in seeker_profile.EDUCATION_CHOICES %}
+                    <option value="{{ code }}"
+                        {% if seeker_profile.education == code %}selected{% endif %}>
+                        {{ label }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="submit-btn">Setuju dan lanjutkan</button>
+    </form>
+</div>
+
+{% endblock %}

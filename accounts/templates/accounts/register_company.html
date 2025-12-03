@@ -1,0 +1,44 @@
+{% load static %}
+
+<!-- MODAL REGISTER COMPANY -->
+<div id="registerCompanyModal" class="modal">
+  <div class="modal-content">
+    <span class="close" data-close="registerCompanyModal">&times;</span>
+    <h2>Daftar Employer</h2>
+
+    <!-- FORM REGISTER -->
+    <form id="registerCompanyForm" method="POST" action="{% url 'accounts:register_company' %}">
+      {% csrf_token %}
+      <input type="text" name="full_name" placeholder="Nama Perusahaan / PIC" required>
+      <input type="email" name="email" placeholder="Email Perusahaan" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <input type="password" name="confirm_password" placeholder="Konfirmasi Password" required>
+      <button type="submit">Daftar</button>
+    </form>
+
+    <p>Sudah punya akun? 
+      <a href="#" id="openLoginCompanyLink"><em>Masuk di sini.</em></a>
+    </p>
+
+    <!-- MESSAGE BOX SEKARANG DI SINI ⬇️ -->
+    <div id="registerCompanyMessage" class="message-box"></div>
+
+  </div>
+</div>
+
+<!-- MODAL VERIFIKASI -->
+<div id="verifyCompanyModal" class="modal">
+  <div class="modal-content">
+    <h2>Verifikasi Email</h2>
+    <p>Kami telah mengirimkan tautan verifikasi ke email perusahaan. Silakan cek email dan klik link untuk mengaktifkan akun.</p>
+    <button id="closeVerifyCompany">Tutup</button>
+  </div>
+</div>
+
+{% if show_verify_modal %}
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("verifyCompanyModal").style.display = "flex";
+});
+</script>
+{% endif %}

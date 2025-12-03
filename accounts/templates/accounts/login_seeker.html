@@ -1,0 +1,18 @@
+{% load static %}
+<div id="loginSeekerModal" class="modal">
+  <div class="modal-content">
+    <span class="close" data-close="loginSeekerModal">&times;</span>
+    <h2>Login Job Seeker</h2>
+
+    <form id="loginSeekerForm" method="POST" action="{% url 'accounts:login_seeker' %}">
+      {% csrf_token %}
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <p><a href="#" id="openForgotSeekerLink"><em>Lupa password?</em></a></p>
+    <p>Tidak punya akun? <a href="#" id="openRegisterSeekerLink"><em>Daftar di sini</em></a></p>
+    <div id="loginSeekerMessage" class="message-box"></div>
+  </div>
+</div>

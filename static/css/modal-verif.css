@@ -1,0 +1,59 @@
+/* ============================================================
+   MODAL VERIF
+   ============================================================ */
+#verifySeekerModal .modal-content,
+#verifyCompanyModal .modal-content {
+  background: linear-gradient(180deg, #cce8ff 0%, #99cfff 100%);
+  border: 2px solid #007bff;
+  padding: 30px;
+  width: 360px;
+  text-align: center;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+#verifySeekerModal .modal-content h2,
+#verifyCompanyModal .modal-content h2 {
+  color: #004a99;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+#verifySeekerModal .modal-content p,
+#verifyCompanyModal .modal-content p {
+  font-size: 15px;
+  color: #002d66;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+#verifySeekerModal .modal-content button,
+#verifyCompanyModal .modal-content button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 0;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#verifySeekerModal .modal-content button:hover,
+#verifyCompanyModal .modal-content button:hover {
+  background-color: #0056b3;
+}
+
+/* Tambahan animasi */
+#verifySeekerModal .modal-content,
+#verifyCompanyModal .modal-content {
+  animation: slideDown 0.4s ease-out;
+}
+
+
+
+@keyframes slideDown {
+  from { transform: translateY(-30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
