@@ -168,16 +168,21 @@ document.addEventListener("DOMContentLoaded", () => {
           showMessage(messageId, result.message || "Berhasil!", "success");
           form.reset();
 
-          // Login → reload halaman
           if (formId === "loginSeekerForm" || formId === "loginCompanyForm") {
             window.location.reload();
           } 
-          // Register → tampil modal verifikasi
           else if (formId === "registerSeekerForm" || formId === "registerCompanyForm") {
             if (modalClose) modalClose.style.display = "none";
             if (modalOpen) modalOpen.style.display = "flex";
           }
         }
+
+        // ========== BAGIAN PENTING YANG DITAMBAHKAN ==========
+        else if (result.status === "error") {
+          const errMessages = result.errors || result.message || ["Gagal diproses"];
+          showMessage(messageId, errMessages, "error");
+        }
+        // ======================================================
 
       } catch(err) {
         console.error(err);

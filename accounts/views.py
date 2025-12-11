@@ -110,13 +110,6 @@ def register_company(request):
 # LOGIN SEEKER
 # ===========================================
 def login_seeker(request):
-    """
-    Fungsi login Job Seeker.
-    - Autentikasi email + password
-    - Cek role
-    - Cek is_active (email verified)
-    - Respons JSON untuk AJAX frontend
-    """
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -125,30 +118,28 @@ def login_seeker(request):
             user = authenticate(request, email=email, password=password)
 
             if user is None:
-                return JsonResponse({"status": "error", "message": "Email atau password salah."})
-            elif user.role != "seeker":
-                return JsonResponse({"status": "error", "message": "Akun ini bukan akun Job Seeker."})
-            elif not user.is_active:
-                return JsonResponse({"status": "error", "message": "Akun belum diverifikasi."})
-            else:
-                login(request, user)
-                return JsonResponse({"status": "success", "username": user.full_name})
-        else:
-            errors = {field: error_list for field, error_list in form.errors.items()}
-            return JsonResponse({"status": "error", "errors": errors})
+                return JsonResponse({"status": "error", "errors": {"__all__": ["Email atau password salah."]}})
 
-    form = LoginForm()
-    return render(request, "accounts/login_seeker.html", {"form": form})
+            if user.role != "seeker":
+                return JsonResponse({"status": "error", "errors": {"__all__": ["Akun ini bukan akun Job Seeker."]}})
+
+            if not user.is_active:
+                return JsonResponse({"status": "error", "errors": {"__all__": ["Akun belum diverifikasi."]}})
+
+            login(request, user)
+            return JsonResponse({"status": "success", "username": user.full_name})
+
+        # Form validation error
+        return JsonResponse({"status": "error", "errors": form.errors})
+
+    return render(request, "accounts/login_seeker.html", {"form": LoginForm()})
+
 
 
 # ===========================================
 # LOGIN COMPANY
 # ===========================================
 def login_company(request):
-    """
-    Fungsi login Company.
-    - Mirip login_seeker
-    """
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -157,20 +148,20 @@ def login_company(request):
             user = authenticate(request, email=email, password=password)
 
             if user is None:
-                return JsonResponse({"status": "error", "message": "Email atau password salah."})
-            elif user.role != "company":
-                return JsonResponse({"status": "error", "message": "Akun ini bukan akun Perusahaan."})
-            elif not user.is_active:
-                return JsonResponse({"status": "error", "message": "Akun belum diverifikasi."})
-            else:
-                login(request, user)
-                return JsonResponse({"status": "success", "username": user.full_name})
-        else:
-            errors = {field: error_list for field, error_list in form.errors.items()}
-            return JsonResponse({"status": "error", "errors": errors})
+                return JsonResponse({"status": "error", "errors": {"__all__": ["Email atau password salah."]}})
 
-    form = LoginForm()
-    return render(request, "accounts/login_company.html", {"form": form})
+            if user.role != "company":
+                return JsonResponse({"status": "error", "errors": {"__all__": ["Akun ini bukan akun Perusahaan."]}})
+
+            if not user.is_active:
+                return JsonResponse({"status": "error", "errors": {"__all__": ["Akun belum diverifikasi."]}})
+
+            login(request, user)
+            return JsonResponse({"status": "success", "username": user.full_name})
+
+        return JsonResponse({"status": "error", "errors": form.errors})
+
+    return render(request, "accounts/login_company.html", {"form": LoginForm()})
 
 
 # ===========================================
@@ -385,5 +376,15 @@ def logout_user(request):
 @login_required
 def delete_account(request):
     user = request.user
+
+    # Hapus profile dahulu agar signal post_delete berjalan
+    if hasattr(user, "company_profile"):
+        user.company_profile.delete()
+
+    if hasattr(user, "seeker_profile"):
+        user.seeker_profile.delete()
+
+    # terakhir hapus user
     user.delete()
-    return redirect('/')
+
+    return redirect("/")

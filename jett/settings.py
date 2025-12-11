@@ -13,7 +13,7 @@ SESSION_COOKIE_AGE = 1209600  # 2 minggu
 SESSION_SAVE_EVERY_REQUEST = True
 
 # =========================
-# DATABASE (SQLite)
+# DATABASE (docker)
 # =========================
 DATABASES = {
     'default': {
