@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Lamaran Saya{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'applications/seeker/css/my_applications.css' %}">
+
+<div class="applications-wrapper">
+
+  <h1 class="page-title">Lamaran Saya</h1>
+
+  {% if applications %}
+    <div class="table-wrapper">
+      <table class="applications-table">
+        <thead>
+          <tr>
+            <th>Pekerjaan</th>
+            <th>Perusahaan</th>
+            <th>Tanggal Melamar</th>
+            <th>CV</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for app in applications %}
+            <tr>
+              <td>
+                <strong>{{ app.job.title }}</strong>
+              </td>
+
+              <td>
+                {{ app.job.company.full_name }}
+              </td>
+
+              <td>
+                {{ app.applied_at|date:"d M Y" }}
+              </td>
+
+              <td>
+                {% if app.cv %}
+                  <a href="{{ app.cv.url }}" target="_blank" class="cv-link">
+                    Lihat CV
+                  </a>
+                {% else %}
+                  <span class="cv-empty">—</span>
+                {% endif %}
+              </td>
+
+              <td>
+                <span class="status {{ app.status }}">
+                  {{ app.get_status_display }}
+                </span>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty-text">Kamu belum melamar pekerjaan apa pun.</p>
+  {% endif %}
+
+</div>
+{% endblock %}

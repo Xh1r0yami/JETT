@@ -1,31 +1,42 @@
 from django.db import models
-from django.utils import timezone
-import uuid
-
 from accounts.models import CustomUser
 from jobs.models import Job
 
+class Application(models.Model):
 
-class JobApplication(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    STATUS_CHOICES = (
+        ("pending", "Pending"),
+        ("accepted", "Accepted"),
+        ("rejected", "Rejected"),
+    )
+
+    # ===== Relasi utama =====
+    job = models.ForeignKey(
+        Job,
+        on_delete=models.CASCADE,
+        related_name="applications"
+    )
 
     seeker = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
-        related_name="applications",
-        limit_choices_to={"role": "seeker"},
+        related_name="applications"
     )
 
-    job = models.ForeignKey(
-        Job,
-        on_delete=models.CASCADE,
-        related_name="applications",
+    # ===== Data lamaran =====
+    cv = models.FileField(
+        upload_to="cvs/"
     )
 
-    cv_file = models.FileField(upload_to="cv/", blank=True)
-    cover_letter = models.TextField(blank=True)
+    status = models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default="pending"
+    )
 
-    applied_at = models.DateTimeField(default=timezone.now)
+    applied_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
     def __str__(self):
-        return f"{self.seeker.full_name} → {self.job.title}"
+        return f"{self.seeker.email} - {self.job.title}"

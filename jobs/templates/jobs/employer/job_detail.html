@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Detail Lowongan{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'jobs/employer/css/job_detail.css' %}">
+
+<div class="job-detail-wrapper">
+
+  <!-- ===== JUDUL ===== -->
+  <h1 class="job-title">{{ job.title }}</h1>
+
+  <!-- ===== DETAIL LOWONGAN ===== -->
+  <div class="job-detail-section">
+
+    <!-- DESKRIPSI -->
+    <div class="detail-group">
+      <label>Deskripsi Tugas</label>
+      <p class="multiline">{{ job.tasks }}</p>
+    </div>
+
+    <div class="detail-group">
+      <label>Persyaratan</label>
+      <p class="multiline">{{ job.requirements }}</p>
+    </div>
+
+    <!-- INFO UTAMA -->
+    <div class="detail-row">
+      <div class="detail-group small">
+        <label>Tipe pekerjaan</label>
+        <p>{{ job.get_job_type_display }}</p>
+      </div>
+
+      <div class="detail-group small">
+        <label>Lokasi</label>
+        <p>{{ job.get_location_display }}</p>
+      </div>
+
+      <div class="detail-group small">
+        <label>Range gaji</label>
+        <p>{{ job.get_salary_range_display }}</p>
+      </div>
+    </div>
+
+    <!-- STATUS DAN TANGGAL -->
+    <div class="detail-row">
+      <div class="detail-group small">
+        <label>Tanggal dibuat</label>
+        <p>{{ job.created_at|date:"d M Y" }}</p>
+      </div>
+
+      <div class="detail-group small">
+        <form method="POST" action="{% url 'jobs:update_job_status' job.id %}">
+          {% csrf_token %}
+          <label>Status Lowongan</label>
+          <select name="status">
+            <option value="active" {% if job.status == "active" %}selected{% endif %}>
+              Aktif
+            </option>
+            <option value="inactive" {% if job.status == "inactive" %}selected{% endif %}>
+              Tidak Aktif
+            </option>
+          </select>
+          <button type="submit" class="btn-save">Simpan Perubahan</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- HAPUS LOWONGAN -->
+    <div class="job-detail-actions">
+      <form method="POST"
+            action="{% url 'jobs:delete_job' job.id %}"
+            onsubmit="return confirm('Yakin ingin menghapus lowongan ini?');">
+        {% csrf_token %}
+        <button type="submit" class="btn-delete">Hapus Lowongan</button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- ===== DAFTAR PELAMAR ===== -->
+  <h2 class="section-title">Daftar Pelamar</h2>
+
+  {% if applications %}
+    <div class="applicant-list">
+
+      {% for app in applications %}
+        <div class="applicant-card">
+
+          <!-- INFO PELAMAR -->
+          <div class="applicant-info">
+            <h3>{{ app.seeker.full_name }}</h3>
+            <p>{{ app.seeker.email }}</p>
+            <p>{{ app.seeker.phone_number }}</p>
+
+            <p class="applied-date">
+              Melamar pada {{ app.applied_at|date:"d M Y" }}
+            </p>
+
+            <a href="{{ app.cv.url }}" target="_blank" class="btn-cv">
+              Lihat CV
+            </a>
+          </div>
+
+          <!-- AKSI / STATUS -->
+          <div class="applicant-actions">
+
+            {% if app.status == "pending" %}
+
+              <form method="POST"
+                    action="{% url 'applications:update_application_status' app.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="status" value="accepted">
+                <button type="submit" class="btn-accept">Terima</button>
+              </form>
+
+              <form method="POST"
+                    action="{% url 'applications:update_application_status' app.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="status" value="rejected">
+                <button type="submit" class="btn-reject">Tolak</button>
+              </form>
+
+            {% elif app.status == "accepted" %}
+              <span class="status-badge accepted">Diterima</span>
+
+            {% elif app.status == "rejected" %}
+              <span class="status-badge rejected">Ditolak</span>
+
+            {% endif %}
+
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+  {% else %}
+    <p class="empty-text">Belum ada pelamar untuk lowongan ini.</p>
+  {% endif %}
+
+</div>
+{% endblock %}

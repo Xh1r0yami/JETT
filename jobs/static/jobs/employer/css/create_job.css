@@ -1,0 +1,99 @@
+.create-job-wrapper {
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 0 20px;
+  font-family: "Hanken Grotesk", sans-serif;
+}
+
+/* ===== HEADER ===== */
+.create-job-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.create-job-header h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.create-job-header p {
+  font-size: 1.05rem;
+  color: #555;
+}
+
+/* ===== FORM ===== */
+.create-job-form {
+  margin-top: 35px;
+}
+
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.input-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+  outline: none;
+  border-color: #176ff2;
+}
+
+/* ===== ACTIONS ===== */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn-primary {
+  background: #176ff2;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: #0f5bd8;
+}
+
+.btn-secondary {
+  background: #f0f0f0;
+  color: #333;
+  padding: 12px 22px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-secondary:hover {
+  background: #e0e0e0;
+}

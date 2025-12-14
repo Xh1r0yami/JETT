@@ -1,0 +1,88 @@
+.company-profile-wrapper {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+  font-family: "Hanken Grotesk", sans-serif;
+}
+
+/* ===== CARD ===== */
+.profile-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 36px 40px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== HEADER ===== */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.company-identity {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* ===== LOGO ===== */
+.company-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #e2e2e2;
+}
+
+.company-logo.placeholder {
+  background: #377dff;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== NAME ===== */
+.company-name {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.company-email {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* ===== GRID ===== */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 26px 40px;
+}
+
+.field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #777;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.field p {
+  font-size: 0.95rem;
+  color: #222;
+}
+
+.field.full {
+  grid-column: span 2;
+}
+
+.description {
+  line-height: 1.7;
+  color: #333;
+}

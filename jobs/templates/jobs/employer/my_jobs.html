@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Lowongan Saya{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'jobs/employer/css/my_jobs.css' %}">
+
+<div class="my-jobs-wrapper">
+
+  <!-- ===== HEADER ===== -->
+  <div class="my-jobs-header">
+    <h1>Lowongan Saya</h1>
+    <p>Daftar semua lowongan yang telah Anda buat</p>
+  </div>
+
+  <!-- ===== FLASH MESSAGE ===== -->
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert-success">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- ===== JOB LIST ===== -->
+  <div class="job-list">
+
+    {% if jobs %}
+      {% for job in jobs %}
+        <div class="job-card">
+
+          <!-- Judul -->
+          <h2 class="job-title">{{ job.title }}</h2>
+
+          <!-- Info tanpa label -->
+          <div class="job-info">
+            <p class="job-type">{{ job.get_job_type_display }}</p>
+            <p class="job-location">{{ job.get_location_display }}</p>
+            <p class="job-salary">{{ job.get_salary_range_display }}</p>
+          </div>
+
+          <!-- Status & Action (SEBARIS) -->
+          <div class="job-footer">
+            <div class="job-status {{ job.status }}">
+              {{ job.get_status_display }}
+            </div>
+
+            <a href="{% url 'jobs:job_detail' job.id %}" class="btn-detail">
+              Lihat Detail
+            </a>
+          </div>
+
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="empty-text">Belum ada lowongan yang dibuat.</p>
+    {% endif %}
+
+  </div>
+
+</div>
+
+{% endblock %}

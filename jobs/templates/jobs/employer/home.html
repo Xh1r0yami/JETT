@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Dashboard Perusahaan{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'jobs/employer/css/employer_home.css' %}">
+
+<div class="employer-home-wrapper">
+
+  <!-- ===== HEADER ===== -->
+  <div class="employer-home-header">
+    <h1>Mulai Rekrut Talenta Terbaik Bersama JETT!</h1>
+    <p>Kelola lowongan dan pantau pelamar Anda</p>
+  </div>
+
+  <!-- ===== ACTION CARDS ===== -->
+  <div class="employer-card-container">
+
+    <!-- Buat Lowongan -->
+    <a href="{% url 'jobs:create_job' %}" class="employer-card">
+      <div class="card-icon">➕</div>
+      <h3>Buat Lowongan</h3>
+      <p>Pasang lowongan pekerjaan baru untuk perusahaan anda</p>
+    </a>
+
+    <!-- Daftar Lowongan -->
+    <a href="{% url 'jobs:my_jobs' %}" class="employer-card secondary">
+      <div class="card-icon">📄</div>
+      <h3>Lowongan Saya</h3>
+      <p>Lihat dan kelola lowongan yang sudah dibuat</p>
+    </a>
+
+  </div>
+
+</div>
+
+{% endblock %}

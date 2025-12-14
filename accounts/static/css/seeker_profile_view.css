@@ -1,0 +1,62 @@
+.seeker-profile-wrapper {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+  font-family: "Hanken Grotesk", sans-serif;
+}
+
+/* ===== CARD ===== */
+.profile-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 36px 40px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== HEADER ===== */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+}
+
+.seeker-name {
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.seeker-email {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* ===== GRID ===== */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 26px 40px;
+}
+
+.field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #777;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.field p {
+  font-size: 0.95rem;
+  color: #222;
+}
+
+.field.full {
+  grid-column: span 2;
+}

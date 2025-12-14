@@ -79,7 +79,8 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "segelaskopisaja@gmail.com"
-EMAIL_HOST_PASSWORD = "ngno iebn qdqu jjkw"   
+EMAIL_HOST_PASSWORD = "ngno iebn qdqu jjkw" 
+DEFAULT_FROM_EMAIL = "JETT <segelaskopisaja@gmail.com>"
 
 # =========================
 # INSTALLED APPS

@@ -1,7 +1,17 @@
 from django.urls import path
 from . import views
 
+app_name = "applications"
+
 urlpatterns = [
-    path("apply/<uuid:job_id>/", views.apply_job, name="apply_job"),
-    path("success/", views.application_success, name="application_success"),
+    # ===== SEEKER =====
+    path("apply/<int:job_id>/", views.apply_job, name="apply_job"),
+    path("my/", views.my_applications, name="my_applications"),
+
+    # ===== COMPANY =====
+    path(
+        "update/<int:application_id>/",
+        views.update_application_status,
+        name="update_application_status"
+    ),
 ]

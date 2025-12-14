@@ -1,0 +1,66 @@
+.employer-home-wrapper {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+  font-family: "Hanken Grotesk", sans-serif;
+}
+
+/* ===== HEADER ===== */
+.employer-home-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.employer-home-header h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.employer-home-header p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* ===== CARDS ===== */
+.employer-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.employer-card {
+  cursor: pointer;
+  background: linear-gradient(180deg, #e6f0ff 0%, #cfe2ff 100%);
+  border-radius: 18px;
+  padding: 35px 25px;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.employer-card.secondary {
+  background: linear-gradient(180deg, #ffffff 0%, #f3f7ff 100%);
+}
+
+.employer-card:hover {
+  color: #176ff2;
+  transform: translateY(-6px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.employer-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.employer-card p {
+  font-size: 0.95rem;
+  color: #555;
+}

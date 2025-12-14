@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Profil Saya{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/seeker_profile_view.css' %}">
+
+<div class="seeker-profile-wrapper">
+
+  <div class="profile-card">
+
+    <!-- HEADER -->
+    <div class="profile-header">
+      <div class="identity">
+        <h2 class="seeker-name">{{ user.full_name }}</h2>
+        <p class="seeker-email">{{ user.email }}</p>
+      </div>
+    </div>
+
+    <!-- DATA -->
+    <div class="profile-grid">
+
+      <div class="field">
+        <label>Tanggal Lahir</label>
+        <p>
+          {% if seeker_profile.date_of_birth %}
+            {{ seeker_profile.date_of_birth|date:"d M Y" }}
+          {% else %}
+            —
+          {% endif %}
+        </p>
+      </div>
+
+      <div class="field">
+        <label>Nomor Telepon</label>
+        <p>{{ seeker_profile.phone|default:"—" }}</p>
+      </div>
+
+      <div class="field full">
+        <label>Alamat</label>
+        <p>{{ seeker_profile.address|default:"—" }}</p>
+      </div>
+
+      <div class="field">
+        <label>Pendidikan Terakhir</label>
+        <p>
+          {% if seeker_profile.education %}
+            {{ seeker_profile.get_education_display }}
+          {% else %}
+            —
+          {% endif %}
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

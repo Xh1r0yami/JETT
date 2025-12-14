@@ -2,7 +2,7 @@
 <nav class="navbar">
   <div class="nav-container">
 
-    <!-- LOGO - balik ke landing -->
+    <!-- LOGO -->
     <div class="logo">
       <a href="{% url 'landing:home' %}">
         <img src="{% static 'img/logo-navbar.png' %}" alt="JETT Logo">
@@ -13,43 +13,51 @@
     <div class="nav-right">
 
       <div class="nav-links">
-        <a href="{% url 'landing:home' %}">Cari Kerja</a>
-        <a href="#">Cari Staf</a>
+
+        <!-- ======= GUEST & SEEKER ======= -->
+        {% if not request.user.is_authenticated or request.user.role == "seeker" %}
+          <a href="{% url 'jobs:job_list' %}">Cari Kerja</a>
+          <a href="#" id="openCreateJobNavbar">Buat Lowongan</a>
+        {% endif %}
+
+        <!-- ======= COMPANY ======= -->
+        {% if request.user.is_authenticated and request.user.role == "company" %}
+          <a href="#">Cari Kerja</a>
+          <a href="{% url 'jobs:employer_home' %}">Buat Lowongan</a>
+        {% endif %}
+
       </div>
 
       <!-- ======= USER BELUM LOGIN ======= -->
       {% if not request.user.is_authenticated %}
-      <div class="signin-btn" id="signin-wrapper">
-        <button id="openLoginModal">Sign In</button>
-      </div>
+        <div class="signin-btn" id="signin-wrapper">
+          <button id="openLoginModal">Sign In</button>
+        </div>
       {% endif %}
 
       <!-- ======= USER SUDAH LOGIN ======= -->
       {% if request.user.is_authenticated %}
-      <div class="profile-dropdown">
-        <button class="profile-btn">
-          {{ request.user.full_name|default:request.user.email }}
-        </button>
+        <div class="profile-dropdown">
+          <button class="profile-btn">
+            {{ request.user.full_name|default:request.user.email }}
+          </button>
 
-        <div class="profile-menu">
-          {% if request.user.role == "seeker" %}
-            <a href="{% url 'accounts:seeker_profile' %}">Profil</a>
-          {% elif request.user.role == "company" %}
-            <a href="{% url 'accounts:company_profile' %}">Profil</a>
-          {% endif %}
+          <div class="profile-menu">
 
-          <a href="{% url 'accounts:logout' %}">Logout</a>
+            {% if request.user.role == "seeker" %}
+              <a href="{% url 'accounts:seeker_profile' %}">Profil</a>
+              <a href="{% url 'applications:my_applications' %}">Lamaran Saya</a>
+            {% elif request.user.role == "company" %}
+              <a href="{% url 'accounts:company_profile' %}">Profil</a>
+            {% endif %}
 
-          {% comment %}
-          Jika punya fitur delete account
-          {% endcomment %}
-          <a href="{% url 'accounts:delete_account' %}">Hapus Akun</a>
+            <a href="{% url 'accounts:logout' %}">Logout</a>
+            <a href="{% url 'accounts:delete_account' %}">Hapus Akun</a>
+          </div>
         </div>
-      </div>
       {% endif %}
 
     </div>
 
   </div>
 </nav>
-

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Profil Perusahaan{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/company_profile_view.css' %}">
+
+<div class="company-profile-wrapper">
+
+  <div class="profile-card">
+
+    <!-- HEADER -->
+    <div class="profile-header">
+      <div class="company-identity">
+        {% if company_profile.logo %}
+          <img src="{{ company_profile.logo.url }}" class="company-logo">
+        {% else %}
+          <div class="company-logo placeholder">
+            {{ user.full_name|slice:":1" }}
+          </div>
+        {% endif %}
+
+        <div>
+          <h2 class="company-name">{{ user.full_name }}</h2>
+          <p class="company-email">{{ user.email }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM INFO (READ MODE) -->
+    <div class="profile-grid">
+
+      <div class="field">
+        <label>Nama Pemilik</label>
+        <p>{{ company_profile.owner_name|default:"—" }}</p>
+      </div>
+
+      <div class="field">
+        <label>Industri</label>
+        <p>{{ company_profile.get_industry_display|default:"—" }}</p>
+      </div>
+
+      <div class="field">
+        <label>Nomor Telepon</label>
+        <p>{{ company_profile.phone|default:"—" }}</p>
+      </div>
+
+      <div class="field">
+        <label>Alamat</label>
+        <p>{{ company_profile.address|default:"—" }}</p>
+      </div>
+
+      <div class="field full">
+        <label>Deskripsi Perusahaan</label>
+        <p class="description">
+          {{ company_profile.description|default:"Belum ada deskripsi perusahaan." }}
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

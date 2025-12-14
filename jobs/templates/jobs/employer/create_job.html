@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Buat Lowongan{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'jobs/employer/css/create_job.css' %}">
+
+<div class="create-job-wrapper">
+
+  <!-- ===== HEADER ===== -->
+  <div class="create-job-header">
+    <h1>Buat Lowongan Pekerjaan</h1>
+    <p>Lengkapi informasi lowongan untuk mulai membuat lowongan</p>
+  </div>
+
+  <!-- ===== FORM ===== -->
+  <form method="POST" class="create-job-form">
+    {% csrf_token %}
+
+    <!-- Judul Pekerjaan -->
+    <div class="input-group">
+      <label>Judul Pekerjaan</label>
+      {{ form.title }}
+    </div>
+
+    <!-- Deskripsi Tugas -->
+    <div class="input-group">
+      <label>Deskripsi Tugas</label>
+      {{ form.tasks }}
+    </div>
+
+    <!-- Persyaratan -->
+    <div class="input-group">
+      <label>Persyaratan</label>
+      {{ form.requirements }}
+    </div>
+
+    <!-- Job Type -->
+    <div class="input-group">
+      <label>Tipe Pekerjaan</label>
+      {{ form.job_type }}
+    </div>
+
+    <!-- Lokasi -->
+    <div class="input-group">
+      <label>Lokasi</label>
+      {{ form.location }}
+    </div>
+
+    <!-- Gaji -->
+    <div class="input-group">
+      <label>Range Gaji</label>
+      {{ form.salary_range }}
+    </div>
+
+    <!-- ACTION -->
+    <div class="form-actions">
+      <a href="{% url 'jobs:employer_home' %}" class="btn-secondary">Batal</a>
+      <button type="submit" class="btn-primary">Publikasikan Lowongan</button>
+    </div>
+
+  </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,137 @@
+.my-jobs-wrapper {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+  font-family: "Hanken Grotesk", sans-serif;
+}
+
+/* ===== HEADER ===== */
+.my-jobs-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.my-jobs-header h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.my-jobs-header p {
+  font-size: 1.05rem;
+  color: #555;
+}
+
+/* ===== ALERT ===== */
+.alert-success {
+  background: #e6f4ea;
+  color: #2e7d32;
+  padding: 12px 18px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+}
+
+/* ===== JOB LIST ===== */
+.job-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== JOB CARD ===== */
+.job-card {
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 25px;
+  transition: box-shadow 0.25s ease;
+}
+
+.job-card:hover {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* ===== JUDUL ===== */
+.job-title {
+  font-size: 1.35rem;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+/* ===== INFO TANPA LABEL ===== */
+.job-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.job-info p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Hierarki visual */
+.job-type {
+  color: #333;
+}
+
+.job-location {
+  color: #666;
+}
+
+.job-salary {
+  color: #176ff2;
+}
+
+/* ===== STATUS ===== */
+.job-status {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.job-status.active {
+  background: #e3f2fd;
+  color: #176ff2;
+}
+
+.job-status.inactive {
+  background: #fdecea;
+  color: #d32f2f;
+}
+
+/* ===== FOOTER ===== */
+.job-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+
+/* ===== ACTION ===== */
+
+.btn-detail {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 20px;
+  background: #176ff2;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-detail:hover {
+  background: #0f5bd8;
+}
+
+/* ===== EMPTY ===== */
+.empty-text {
+  text-align: center;
+  color: #777;
+  font-size: 1rem;
+}
