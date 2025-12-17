@@ -397,6 +397,112 @@ html, body {
   background: #f3f4f6;
 }
 
+/* ============================================================
+   LANDING PAGE ONLY (HERO ENHANCEMENT)
+   TAMBAHAN — AMAN, TIDAK RUSAK BAGIAN LAIN
+   ============================================================ */
+
+.hero-container {
+  text-align: center;
+  max-width: 800px;
+  padding: 0 1rem;
+}
+
+.highlight {
+  color: #176ff2;
+  font-weight: 700;
+}
+
+.headline-line {
+  width: 80px;
+  height: 4px;
+  background-color: #176ff2;
+  margin: 1.2rem auto 1.6rem auto;
+  border-radius: 10px;
+}
+
+.subheadline {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #444;
+  font-weight: 500;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   LANDING PAGE POLISH (MATCH EXISTING STYLE)
+   ============================================================ */
+
+/* HERO POLISH */
+.hero {
+  height: 85vh;
+  padding: 2rem;
+}
+
+.headline {
+  font-size: 2.8rem;
+  line-height: 1.2;
+}
+
+.hero span {
+  color: #176ff2;
+}
+
+.subheadline {
+  margin-top: 1.2rem;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* ============================================================
+   ABOUT STORY — VISUAL SEPARATOR (NO CARD, NO SHADOW)
+   ============================================================ */
+
+.about-story {
+  position: relative;
+  margin: 6rem auto;
+  padding: 5rem 1.5rem;
+  background: linear-gradient(
+    to bottom,
+    #ffffff 0%,
+    #f2f6ff 50%,
+    #ffffff 100%
+  );
+}
+
+.about-content {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-label {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #176ff2;
+}
+
+.about-story h2 {
+  font-size: 2.1rem;
+  margin-bottom: 1.6rem;
+  font-family: "Konkhmer Sleokchher", cursive;
+}
+
+.about-story p {
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: #444;
+}
+
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
 
 /* Animations */
 @keyframes fadeIn {

@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from django.conf import settings
+
 
 from .models import CustomUser, EmailVerification, SeekerProfile, CompanyProfile, PasswordResetToken
 from .forms import RegisterSeekerForm, RegisterCompanyForm, LoginForm
@@ -27,10 +29,24 @@ def register_seeker(request):
             verify_url = request.build_absolute_uri(f"/accounts/verify/{token.token}/")
 
             send_mail(
-                "Verifikasi Email Akun JETT",
-                f"Klik link berikut:\n{verify_url}",
-                "noreply@jett.com",
-                [user.email],
+                subject="Verifikasi Email Akun JETT",
+                message=f"""
+Halo {user.full_name},
+
+Terima kasih telah mendaftar sebagai pencari kerja di JETT.
+
+Untuk mengaktifkan akun dan mulai melamar pekerjaan, silakan lakukan verifikasi email melalui tautan berikut:
+
+{verify_url}
+
+Jika pendaftaran ini tidak dilakukan oleh Anda, abaikan email ini.
+
+—
+JETT | Job Explore Top Talent
+                """,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[user.email],
+                fail_silently=True,
             )
 
             return JsonResponse({"status": "success"})
@@ -56,10 +72,24 @@ def register_company(request):
             verify_url = request.build_absolute_uri(f"/accounts/verify/{token.token}/")
 
             send_mail(
-                "Verifikasi Email Perusahaan JETT",
-                f"Klik link berikut:\n{verify_url}",
-                "noreply@jett.com",
-                [user.email],
+                subject="Verifikasi Email Perusahaan JETT",
+                message=f"""
+Halo {user.full_name},
+
+Terima kasih telah mendaftarkan akun perusahaan di platform JETT.
+
+Untuk mengaktifkan akun perusahaan dan mulai mengelola lowongan pekerjaan, silakan lakukan verifikasi email melalui tautan berikut:
+
+{verify_url}
+
+Jika pendaftaran ini tidak dilakukan oleh pihak perusahaan yang bersangkutan, email ini dapat diabaikan.
+
+—
+JETT | Job Explore Top Talent
+                """,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[user.email],
+                fail_silently=True,
             )
 
             return JsonResponse({"status": "success"})
@@ -67,6 +97,7 @@ def register_company(request):
         return JsonResponse({"status": "error", "errors": form.errors})
 
     return render(request, "accounts/register_company.html", {"form": RegisterCompanyForm()})
+
 
 
 # ===========================================
@@ -266,10 +297,31 @@ def reset_password_request(request):
             reverse("accounts:reset_password_confirm", args=[token.token])
         )
 
-        send_mail("Reset Password JETT", reset_url, "noreply@jett.com", [email])
+        send_mail(
+            subject="Permintaan Reset Password Akun JETT",
+            message=f"""
+Halo {user.full_name},
+
+Kami menerima permintaan untuk melakukan reset password pada akun JETT Anda.
+
+Silakan klik tautan berikut untuk mengatur password baru:
+
+{reset_url}
+
+Jika Anda tidak merasa melakukan permintaan ini, abaikan email ini dan tidak perlu melakukan tindakan apa pun.
+
+—
+JETT | Job Explore Top Talent
+            """,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[email],
+            fail_silently=True,
+        )
+
         return JsonResponse({"status": "success"})
 
     return JsonResponse({"status": "error"})
+
 
 
 def reset_password_confirm(request, token):

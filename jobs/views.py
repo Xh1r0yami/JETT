@@ -6,11 +6,7 @@ from django.views.decorators.http import require_POST
 from django.db.models import Q
 
 
-
 def employer_home(request):
-    if not request.user.is_authenticated or request.user.role != "company":
-        return redirect("landing:home")
-
     return render(request, "jobs/employer/home.html")
 
 def create_job(request):
