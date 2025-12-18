@@ -1,43 +1,27 @@
-# JETT – Job Portal Web Application
+# JETT – Job Explore Top Talent | PBL RKS 321
 
-Proyek ini adalah aplikasi job portal yang memungkinkan pengguna untuk mendaftar akun, login, melamar pekerjaan, dan bagi perusahaan untuk memposting lowongan.
-Backend dibangun menggunakan **Django**, database menggunakan **MySQL (Docker)**, dan frontend menggunakan template bawaan Django.
+JETT adalah platform job portal yang membantu pencari kerja menemukan peluang karier terbaik dan memudahkan perusahaan mendapatkan talenta yang tepat. Semua proses rekrutmen dilakukan secara online, cepat, dan praktis dalam satu platform.
 
-## Instalasi Dependencies
-
-Sebelum menjalankan project, install library Python berikut:
-
-```bash
-pip install pymysql
-```
-
-## Menjalankan MySQL dengan Docker
-
-1. Pastikan Docker sudah ter-install.
-2. Jalankan perintah berikut di folder project:
-
-
-```bash
-docker compose up -d
-```
-
-Cek status:
-
-```bash
-docker ps
-```
 
 ---
 
+## PBL RKS 321 Members
+1. `Syafiq Adi Kurniawan    (4332401013)`
+2. `Syahdan Arief S         (4332401006)`
+3. `Muhammad Reza Pahlevi   (4332401020)`
+4. `Helena Yolanda Amelia   (4332401027)`
 
-## Cara Collaborator Menjalankan Project
+---
 
-Team yang melakukan `git clone` harus melakukan:
+## Cara Menjalankan Project
+
+Setelah melakukan `git clone` harus melakukan:
 
 1. `pip install pymysql`
 2. `docker compose up -d`
-3. `python manage.py migrate`
-4. `python manage.py runserver`
+3. `docker ps`
+4. `python manage.py migrate`
+5. `python manage.py runserver`
 
 
 ---

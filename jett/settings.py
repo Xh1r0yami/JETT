@@ -95,7 +95,6 @@ INSTALLED_APPS = [
 
     # Aplikasi kamu
     'accounts.apps.AccountsConfig',
-    'companies',
     'jobs',
     'applications',
     'landing',
