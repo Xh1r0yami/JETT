@@ -6,10 +6,10 @@ JETT adalah platform job portal yang membantu pencari kerja menemukan peluang ka
 ---
 
 ## PBL RKS 321 Members
-1. `Syafiq Adi Kurniawan    (4332401013)`
-2. `Syahdan Arief S         (4332401006)`
-3. `Muhammad Reza Pahlevi   (4332401020)`
-4. `Helena Yolanda Amelia   (4332401027)`
+1. Syafiq Adi Kurniawan    (4332401013)
+2. Syahdan Arief S         (4332401006)
+3. Muhammad Reza Pahlevi   (4332401020)
+4. Helena Yolanda Amelia   (4332401027)
 
 ---
 
