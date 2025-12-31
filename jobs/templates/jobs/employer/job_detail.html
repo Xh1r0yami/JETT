@@ -98,8 +98,12 @@
               Melamar pada {{ app.applied_at|date:"d M Y" }}
             </p>
 
-            <a href="{{ app.cv.url }}" target="_blank" class="btn-cv">
-              Lihat CV
+            <!-- ===== SECURE DOWNLOAD CV ===== -->
+            <a
+              href="{% url 'applications:download_cv' app.id %}"
+              class="btn-cv"
+            >
+              Download CV
             </a>
           </div>
 

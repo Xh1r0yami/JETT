@@ -1,6 +1,19 @@
+import uuid
+import os
 from django.db import models
 from accounts.models import CustomUser
 from jobs.models import Job
+
+
+def cv_upload_path(instance, filename):
+    """
+    Simpan CV dengan nama acak (UUID)
+    Contoh: cvs/3f2c9c9e-8b6a-4a33-a0f1.pdf
+    """
+    ext = filename.split('.')[-1]
+    filename = f"{uuid.uuid4()}.{ext}"
+    return os.path.join("cvs", filename)
+
 
 class Application(models.Model):
 
@@ -25,7 +38,7 @@ class Application(models.Model):
 
     # ===== Data lamaran =====
     cv = models.FileField(
-        upload_to="cvs/"
+        upload_to=cv_upload_path
     )
 
     status = models.CharField(

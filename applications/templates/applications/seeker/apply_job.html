@@ -10,7 +10,7 @@
 
   <div style="width: 800px; max-width: 100%;">
 
-    <!-- JUDUL DI LUAR KOTAK -->
+    <!-- JUDUL -->
     <h1 class="page-title">Lamar Pekerjaan</h1>
 
     <!-- KOTAK PUTIH -->
@@ -30,8 +30,11 @@
 
         <div>
           {% if job.company.company_profile.logo %}
-            <img src="{{ job.company.company_profile.logo.url }}"
-                 class="company-logo">
+            <img
+              src="{{ job.company.company_profile.logo.url }}"
+              class="company-logo"
+              alt="Logo Perusahaan"
+            >
           {% else %}
             <div class="company-logo-placeholder">
               {{ job.company.full_name|slice:":1" }}
@@ -54,16 +57,45 @@
       </div>
 
       <!-- FORM APPLY -->
-      <form method="POST" enctype="multipart/form-data" class="apply-form">
+      <form method="POST" enctype="multipart/form-data" class="apply-form" novalidate>
         {% csrf_token %}
 
+        <!-- ===== UPLOAD CV ===== -->
         <div class="form-group">
-          <label>Upload CV (PDF)</label>
-          <input type="file" name="cv" accept=".pdf" required>
+          <label for="id_cv">Upload CV (PDF)</label>
+
+          <input
+            type="file"
+            name="cv"
+            id="id_cv"
+            accept=".pdf"
+            required
+          >
+
+          <!-- NOTE UKURAN -->
+          <small style="color:#666; display:block; margin-top:6px;">
+            Maksimal ukuran file: <strong>2 MB</strong> (PDF)
+          </small>
+
+          <!-- ERROR VALIDASI -->
+          {% if form.cv.errors %}
+            <div style="
+              margin-top:8px;
+              color:#d32f2f;
+              font-size:14px;
+            ">
+              {{ form.cv.errors.0 }}
+            </div>
+          {% endif %}
         </div>
 
-        <div style="display:flex; justify-content:flex-end; gap:12px;">
-          <a href="{% url 'jobs:job_list' %}" class="btn-submit" style="background:#e0e0e0;color:#333;">
+        <!-- TOMBOL -->
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:24px;">
+          <a
+            href="{% url 'jobs:job_list' %}"
+            class="btn-submit"
+            style="background:#e0e0e0; color:#333;"
+          >
             Batal
           </a>
 
@@ -71,6 +103,7 @@
             Kirim Lamaran
           </button>
         </div>
+
       </form>
 
     </div>

@@ -5,15 +5,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{% block title %}JETT - Job Portal{% endblock %}</title>
 
-    <!-- Fonts -->
+    <!-- ================= FAVICON ================= -->
+    <link rel="icon" type="image/png" href="{% static 'img/logo-jett.png' %}">
+
+    <!-- ================= FONTS ================= -->
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Konkhmer+Sleokchher&display=swap" rel="stylesheet">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v={{ now }}">
-    <link rel="stylesheet" href="{% static 'css/modal.css' %}?v={{ now }}">
-    <link rel="stylesheet" href="{% static 'css/modal-verif.css' %}?v={{ now }}">
+    <!-- ================= CSS ================= -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal-verif.css' %}">
     {% block extra_css %}{% endblock %}
 </head>
 
@@ -36,10 +40,10 @@
     {% include "accounts/login_company.html" %}
     {% include "accounts/register_seeker.html" %}
     {% include "accounts/register_company.html" %}
-    {% include "accounts/reset_password.html" %}  
+    {% include "accounts/reset_password.html" %}
 
     <!-- ================= JS ================= -->
-    <script src="{% static 'js/modal.js' %}?v={{ now }}" defer></script>
+    <script src="{% static 'js/modal.js' %}" defer></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

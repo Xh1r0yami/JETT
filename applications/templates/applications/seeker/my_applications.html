@@ -39,8 +39,11 @@
 
               <td>
                 {% if app.cv %}
-                  <a href="{{ app.cv.url }}" target="_blank" class="cv-link">
-                    Lihat CV
+                  <a
+                    href="{% url 'applications:download_cv' app.id %}"
+                    class="cv-link"
+                  >
+                    Download CV
                   </a>
                 {% else %}
                   <span class="cv-empty">—</span>

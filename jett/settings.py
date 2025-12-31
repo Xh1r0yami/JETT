@@ -13,6 +13,13 @@ SESSION_COOKIE_AGE = 1209600  # 2 minggu
 SESSION_SAVE_EVERY_REQUEST = True
 
 # =========================
+# TIMEZONE
+# =========================
+TIME_ZONE = 'Asia/Jakarta'
+USE_TZ = True
+
+
+# =========================
 # DATABASE (docker)
 # =========================
 DATABASES = {
@@ -86,7 +93,6 @@ DEFAULT_FROM_EMAIL = "JETT <segelaskopisaja@gmail.com>"
 # INSTALLED APPS
 # =========================
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

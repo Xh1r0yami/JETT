@@ -2,9 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+from django.http import FileResponse, HttpResponseForbidden, Http404
+import os
+
 from .models import Application
 from .forms import ApplicationForm
 from jobs.models import Job
+
 
 def apply_job(request, job_id):
     if not request.user.is_authenticated or request.user.role != "seeker":
@@ -39,18 +43,52 @@ def apply_job(request, job_id):
         }
     )
 
+
 def my_applications(request):
     if not request.user.is_authenticated or request.user.role != "seeker":
         return redirect("landing:home")
 
-    applications = Application.objects.filter(
-        seeker=request.user
-    ).select_related("job").order_by("-applied_at")
+    applications = (
+        Application.objects
+        .filter(seeker=request.user)
+        .select_related("job")
+        .order_by("-applied_at")
+    )
 
     return render(
         request,
         "applications/seeker/my_applications.html",
         {"applications": applications}
+    )
+
+
+def download_cv(request, application_id):
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden()
+
+    application = get_object_or_404(Application, id=application_id)
+
+    # Authorization:
+    # - Seeker: hanya CV miliknya
+    # - Company: hanya CV untuk job miliknya
+    if request.user.role == "seeker":
+        if application.seeker != request.user:
+            return HttpResponseForbidden()
+
+    elif request.user.role == "company":
+        if application.job.company != request.user:
+            return HttpResponseForbidden()
+
+    else:
+        return HttpResponseForbidden()
+
+    if not application.cv:
+        raise Http404("CV tidak ditemukan")
+
+    return FileResponse(
+        application.cv.open("rb"),
+        as_attachment=True,
+        filename="CV.pdf"
     )
 
 
@@ -114,7 +152,7 @@ JETT | Job Explore Top Talent
                 message=message,
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[application.seeker.email],
-                fail_silently=True,  # biar gak crash kalau email error
+                fail_silently=True,
             )
 
     return redirect(

@@ -14,4 +14,11 @@ urlpatterns = [
         views.update_application_status,
         name="update_application_status"
     ),
+
+    # ===== SECURE CV DOWNLOAD =====
+    path(
+        "download-cv/<int:application_id>/",
+        views.download_cv,
+        name="download_cv"
+    ),
 ]
